@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>再访 · 德州扑克游戏 · 持续关注</title>
+  <style>
+    /* ---- reset & base ---- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #f2f3f5;
+      color: #2e2e33;
+      line-height: 1.6;
+      padding: 0 1.2rem;
+    }
+    a { color: #2b6f9e; text-decoration: none; border-bottom: 1px dotted transparent; transition: border-color 0.2s; }
+    a:hover { border-bottom-color: #2b6f9e; }
+
+    /* ---- layout container ---- */
+    .wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2rem 0 4rem 0;
+    }
+
+    /* ---- top navigation (轻量) ---- */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0 1.2rem 0;
+      border-bottom: 1px solid #d9dce2;
+      margin-bottom: 2.2rem;
+      flex-wrap: wrap;
+    }
+    .nav-brand {
+      font-weight: 500;
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+      color: #3f4a5e;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.8rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      color: #3f4a5e;
+      border-bottom: none;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background: #2b6f9e;
+      transition: width 0.25s;
+      margin-top: 2px;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ---- hero 卡片 (再次访问角度) ---- */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2.6rem 2.8rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03), 0 4px 16px rgba(0,0,0,0.02);
+      border: 1px solid #e6e9ef;
+      margin-bottom: 2.8rem;
+    }
+    .hero-card h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      color: #1f282e;
+      margin-bottom: 0.8rem;
+    }
+    .hero-card p {
+      font-size: 1.05rem;
+      color: #4e555f;
+      max-width: 720px;
+    }
+    .hero-highlight {
+      background: #eef3f8;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 500;
+      color: #1f4a65;
+    }
+
+    /* ---- 核心介绍 section (卡片风格) ---- */
+    .section-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem 2.4rem;
+      border: 1px solid #e2e6ed;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      margin-bottom: 2.2rem;
+    }
+    .section-card h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #1f282e;
+      margin-bottom: 1rem;
+      border-left: 4px solid #7f9bb3;
+      padding-left: 0.8rem;
+    }
+    .section-card p {
+      margin-bottom: 0.9rem;
+      color: #3d444c;
+    }
+
+    /* ---- 三个场景模块 (网格) ---- */
+    .scenes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2.2rem 0 1.8rem 0;
+    }
+    .scene-item {
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid #e2e6ed;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      padding: 1.6rem 1.4rem 1.8rem 1.4rem;
+      transition: box-shadow 0.2s, transform 0.1s;
+    }
+    .scene-item:hover {
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      transform: translateY(-2px);
+    }
+    .scene-item h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #2a3a47;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .scene-item p {
+      font-size: 0.95rem;
+      color: #4a515b;
+    }
+    .scene-marker {
+      display: inline-block;
+      background: #dce5ed;
+      color: #1f3a4a;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.15rem 0.7rem;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ---- 常见说明 / 提示 ---- */
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #e2e6ed;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      padding: 2rem 2.4rem;
+      margin-top: 1.2rem;
+    }
+    .faq-mini h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #1f282e;
+      margin-bottom: 1.2rem;
+      border-left: 4px solid #7f9bb3;
+      padding-left: 0.8rem;
+    }
+    .faq-item {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-weight: 500;
+      color: #2b3e4b;
+      margin-bottom: 0.2rem;
+    }
+    .faq-a {
+      color: #515a64;
+      font-size: 0.95rem;
+    }
+
+    /* ---- 收藏/持续关注 卡片 ---- */
+    .bookmark-note {
+      background: #f7fafd;
+      border-radius: 14px;
+      padding: 1.5rem 1.8rem;
+      border: 1px solid #d8e2ed;
+      margin-top: 1.8rem;
+      text-align: center;
+    }
+    .bookmark-note p {
+      color: #2f404e;
+      font-size: 1rem;
+    }
+
+    /* ---- 响应式 ---- */
+    @media (max-width: 820px) {
+      .scenes-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .top-nav { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+      .nav-links { flex-wrap: wrap; gap: 1.2rem; }
+      .hero-card { padding: 1.8rem 1.4rem; }
+      .hero-card h1 { font-size: 1.6rem; }
+      .section-card { padding: 1.4rem 1.2rem; }
+      .scenes-grid { grid-template-columns: 1fr; }
+      .faq-mini { padding: 1.4rem 1.2rem; }
+      .bookmark-note { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- 顶部导航 -->
+  <nav class="top-nav">
+    <span class="nav-brand">♠ 持续关注</span>
+    <div class="nav-links">
+      <a href="#revisit">再访</a>
+      <a href="#core">规则精要</a>
+      <a href="#scenes">场景</a>
+      <a href="#faq">常见说明</a>
+    </div>
+  </nav>
+
+  <!-- hero 卡片：从再次访问角度切入 -->
+  <div class="hero-card" id="revisit">
+    <h1>再次访问 · 收藏 · 持续理解</h1>
+    <p>
+      无论你是第一次踏足，还是带着旧日的牌局记忆重新打开这个页面——欢迎回来。
+      围绕 <a href="https://space-holdemgames.com" style="border-bottom:1px dotted #b0c7da;">德州扑克游戏</a>，
+      我们梳理了策略脉络、常见情境与规则细节，方便你随时翻看、前后对照。
+      页面轻简，但内容会随着理解加深而显现更多层次。
+    </p>
+  </div>
+
+  <!-- 核心介绍 + 特点 (知识型，段落承接) -->
+  <section class="section-card" id="core">
+    <h2>从理解牌局到形成判断</h2>
+    <p>
+      在 <strong>德州扑克</strong> 中，位置、底池赔率、对手范围与下注尺度构成了最基本的决策框架。
+      很多玩家在最初阶段只关注手牌强度，但随着对局数积累，会发现<span class="hero-highlight">持续关注</span>对手的行动模式与自己的弃牌率同样重要。
+      这并非玄学，而是基于概率与博弈的重复推演。
+    </p>
+    <p>
+      收藏这个页面，并不意味着你需要记忆所有表格；而是当你再次打开时，可以快速定位到某个场景——例如三人底池的 c-bet 频率调整，或者翻牌圈听牌时的跟注阈值。
+      你可以把这里当作一个不断更新的笔记点，每次回访都可能注意到之前忽略的细节。
+    </p>
+  </section>
+
+  <!-- 三个场景模块 -->
+  <div id="scenes"></div>
+  <div class="scenes-grid">
+    <div class="scene-item">
+      <span class="scene-marker">场景 01</span>
+      <h3>♢ 翻前跟注与隔离</h3>
+      <p>
+        当你在按钮位置面对两个平跟玩家时，隔离加注的尺度不仅取决于手牌，也取决于盲注位玩家的挤压倾向。
+        收藏此页便于你下次复盘时对照不同位置的手牌范围表。
+      </p>
+    </div>
+    <div class="scene-item">
+      <span class="scene-marker">场景 02</span>
+      <h3>♢ 翻后持续下注</h3>
+      <p>
+        干燥牌面与湿润牌面的 c-bet 频率差异很大。很多玩家在翻牌圈下注后，转牌圈就不再继续攻击。
+        但如果你愿意记录自己与对手的弃牌率，会发现新的调整空间。
+      </p>
+    </div>
+    <div class="scene-item">
+      <span class="scene-marker">场景 03</span>
+      <h3>♢ 河牌价值与诈唬</h3>
+      <p>
+        河牌圈是利润最集中也最容易犯错的一条街。平衡自己的范围，让对手无法轻松读出你的牌力——这需要反复练习与回顾。
+        你可以把这一页加入浏览器书签，方便每次游戏前快速浏览。
+      </p>
+    </div>
+  </div>
+
+  <!-- 常见说明 / FAQ 摘要 -->
+  <div class="faq-mini" id="faq">
+    <h2>常见说明 · 持续更新</h2>
+    <div class="faq-item">
+      <div class="faq-q">— 为什么每次回访内容会有细微变化？</div>
+      <div class="faq-a">因为理解是逐步深入的。页面会围绕策略、场景与常见误区提供不同角度的表述，帮助你形成自己的判断体系，而不是机械记忆。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">— 我该如何利用这个页面持续学习？</div>
+      <div class="faq-a">建议每次游戏前快速浏览一个场景模块，然后带着问题去牌桌。结束后再回来对照，标记自己忽略的细节。收藏页面可以节省很多搜索时间。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">— 更完整的规则与策略在哪里？</div>
+      <div class="faq-a">你可以随时访问 <a href="https://space-holdemgames.com">德州扑克游戏</a> 来获取更多牌例、概率说明和进阶讨论。这里的介绍更偏向于轻度导航与反复参考。</div>
+    </div>
+  </div>
+
+  <!-- 收藏 / 持续关注 卡片 -->
+  <div class="bookmark-note">
+    <p>🔖 如果你觉得这个页面有帮助，不妨将网址加入收藏夹。<br>
+    持续关注意味着你愿意花时间理解牌局背后的逻辑，而非追求短期运气。</p>
+  </div>
+
+  <!-- 底边留白 + 隐含的联系（已在上文中嵌入链接，这里再自然重复一次） -->
+  <div style="margin-top: 2.6rem; font-size: 0.85rem; color: #7c8795; border-top: 1px solid #d9dce2; padding-top: 1.4rem; text-align: center;">
+    <span>关于 <a href="https://space-holdemgames.com" style="color:#3f5c73;">德州扑克游戏</a> 的内容会逐渐丰富 · 再次访问，总有新的发现</span>
+  </div>
+
+</div>
+</body>
+</html>
